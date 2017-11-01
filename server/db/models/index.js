@@ -14,6 +14,9 @@ const Reviews = require('./reviews')
  * for example, we can say: const {User} = require('../db/models')
  * instead of: const User = require('../db/models/user')
  */
+
+User.hasMany(Reviews, {as: 'UserId'});
+
 module.exports = {
   User,
   Reviews

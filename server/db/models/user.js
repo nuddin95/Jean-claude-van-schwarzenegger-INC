@@ -13,15 +13,15 @@ const User = db.define('user', {
   },
   firstName:{
     type:Sequelize.STRING,
-    defaultValue: "JCVS"
+    allowNull:true
   },
   lastName:{
     type:Sequelize.STRING,
-    defaultValue:"Guest"
+    allowNull:true
   },
   password: {
     type: Sequelize.STRING,
-    allowNull:true  
+    allowNull:true
   },
   status:{
     type: Sequelize.ENUM,
@@ -43,6 +43,9 @@ const User = db.define('user', {
 })
 
 module.exports = User
+
+
+
 
 /**
  * instanceMethods
@@ -82,6 +85,15 @@ User.prototype.getFullName= function (user) {
 /**
  * hooks
  */
+
+User.hook('beforeCreate', (user) => {
+  if(user.status !== 'guest'){
+    if(!(user.email)|| !(user.password)) {
+      throw new Error(`${user.status}s must enter an email and password`);
+    }
+  }
+})
+
 
 // MAY BRING BACK WHEN WE FIGURE OUT WHAT IT DOES
 // const setSaltAndPassword = user => {
