@@ -10,7 +10,7 @@
  * Now that you've got the main idea, check it out in practice below!
  */
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Product, Order} = require('../server/db/models')
 
 async function seed () {
   await db.sync({force: true})
@@ -31,6 +31,9 @@ async function seed () {
     Product.create({name: 'tuner and hooch', category: 'comedy'})
   ])
 
+  const order = await Promise.all([
+    Order.create({status: 'pending'})
+  ])
 
 }
 
@@ -38,6 +41,12 @@ async function seed () {
 // `Async` functions always return a promise, so we can use `catch` to handle any errors
 // that might occur inside of `seed`
 seed()
+  .then(()=>{
+   return Product.findById(1)})  // important to return ***
+  .then(product => {
+    console.log(product.dataValues)
+    return product.setOrders(1)
+  })
   .catch(err => {
     console.error(err.message)
     console.error(err.stack)
@@ -54,4 +63,4 @@ seed()
  * The console.log below will occur before any of the logs that occur inside
  * of the async function
  */
-console.log('seeding...')
+// console.log('seeding...')
