@@ -6,7 +6,7 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: true,
+    allowNull: true, //(this.status === 'guest')
     validate:{
       isEmail:true
     }
