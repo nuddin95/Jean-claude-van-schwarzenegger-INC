@@ -26,6 +26,12 @@ async function seed () {
   // and store the result that the promise resolves to in a variable! This is nice!
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
+
+  const products = await Promise.all([
+    Product.create({name: 'tuner and hooch', category: 'comedy'})
+  ])
+
+
 }
 
 // Execute the `seed` function
