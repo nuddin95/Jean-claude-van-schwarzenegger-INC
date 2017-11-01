@@ -4,21 +4,27 @@ const db = require('../db')
 const Product = db.define('product', {
   name: {
     type: Sequelize.STRING,
+    allowNull: false
   },
-  category: {
-    type: Sequelize.STRING
+  category: { // not going to work !!!***
+    type: Sequelize.STRING,
+    allowNull: false
   },
   description: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
+    allowNull: false
   },
   photos: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    defaultValue: 'https://dr56wvhu2c8zo.cloudfront.net/kungfury/assets/2173642e-fecd-4226-ad2c-abe9bd4c99d4/kung-fury-time-travel.jpg'
   },
   stock: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    allowNull: false
   },
   price: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.DECIMAL,
+    allowNull: false
   }
 })
 

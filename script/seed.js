@@ -9,18 +9,23 @@
  *
  * Now that you've got the main idea, check it out in practice below!
  */
-const db = require('../server/db')
-const {User, Product, Order} = require('../server/db/models')
+const chalk = require('chalk')
 
-async function seed () {
-  await db.sync({force: true})
+const db = require('../server/db')
+const { User, Product, Order, OrderProduct } = require('../server/db/models')
+
+
+
+
+async function seed() {
+  await db.sync({ force: true })
   console.log('db synced!')
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
   // executed until that promise resolves!
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({ email: 'cody@email.com', password: '123' }),
+    User.create({ email: 'murphy@email.com', password: '123' })
   ])
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
@@ -28,11 +33,11 @@ async function seed () {
   console.log(`seeded successfully`)
 
   const products = await Promise.all([
-    Product.create({name: 'tuner and hooch', category: 'comedy'})
+    Product.create({ name: 'tuner and hooch', category: 'comedy', description: 'animals tom hanks + dog', photos: 'none', stock: 18, price: 10 })
   ])
 
   const order = await Promise.all([
-    Order.create({status: 'pending'})
+    Order.create({ status: 'pending' })
   ])
 
 }
@@ -41,22 +46,33 @@ async function seed () {
 // `Async` functions always return a promise, so we can use `catch` to handle any errors
 // that might occur inside of `seed`
 seed()
-  .then(()=>{
-   return Product.findById(1)})  // important to return ***
-  .then(product => {
-    console.log(product.dataValues)
-    return product.setOrders(1)
-  })
-  .catch(err => {
-    console.error(err.message)
-    console.error(err.stack)
-    process.exitCode = 1
-  })
-  .then(() => {
-    console.log('closing db connection')
-    db.close()
-    console.log('db connection closed')
-  })
+.then(()=>{
+ return Order.findById(1) })
+ .then(order => {
+  // console.log(order.dataValues)
+  return order.update({status:'ordered'})
+ })
+
+
+    // .then(arr =>{
+    //   Promise.all(arr)
+    //   .then(args => {
+    //     console.log(args[0])
+    //     console.log(args[1])
+    //   })
+    // })
+
+
+  // .catch(err => {
+  //   console.error(err.message)
+  //   console.error(err.stack)
+  //   process.exitCode = 1
+  // })
+  // .then(() => {
+  //   console.log('closing db connection')
+  //   db.close()
+  //   console.log('db connection closed')
+  // })
 
 /*
  * note: everything outside of the async function is totally synchronous
@@ -64,3 +80,5 @@ seed()
  * of the async function
  */
 // console.log('seeding...')
+
+

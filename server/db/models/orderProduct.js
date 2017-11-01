@@ -12,3 +12,11 @@ const OrderProduct = db.define('orderProduct', {
 })
 
 module.exports = OrderProduct
+
+
+//extra
+
+// when order pending price is null
+
+
+// on checkout (order completion )
