@@ -12,7 +12,7 @@
 const chalk = require('chalk')
 
 const db = require('../server/db')
-const { User, Product, Order, OrderProduct } = require('../server/db/models')
+const { User, Product, Order, orderProduct } = require('../server/db/models')
 
 
 
@@ -40,12 +40,19 @@ async function seed() {
     Order.create({ status: 'pending' })
   ])
 
+
+
 }
 
 // Execute the `seed` function
 // `Async` functions always return a promise, so we can use `catch` to handle any errors
 // that might occur inside of `seed`
 seed()
+.then(() => Product.findById(1))  // important to return ***
+.then(product => {
+  return product.addOrder(1)
+})
+// .then(console.log)
 .then(()=>{
  return Order.findById(1) })
  .then(order => {
