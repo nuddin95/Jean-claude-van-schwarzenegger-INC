@@ -6,31 +6,31 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: true, //(this.status === 'guest')
+    allowNull: false,
     validate:{
       isEmail:true
     }
   },
   firstName:{
     type:Sequelize.STRING,
-    allowNull:true
+    allowNull:false
   },
   lastName:{
     type:Sequelize.STRING,
-    allowNull:true
+    allowNull:false
   },
   password: {
     type: Sequelize.STRING,
-    allowNull:true
+    allowNull:false
   },
   status:{
     type: Sequelize.ENUM,
-    values: ['member', 'guest', 'admin'],
+    values: ['member','admin'],
     allowNull:false
   },
   address:{
     type: Sequelize.STRING,
-    allowNull:true
+    allowNull:false
   }
   //MAY BRING BACK WHEN USING OAUTH
   // ,
