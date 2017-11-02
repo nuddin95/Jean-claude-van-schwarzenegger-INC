@@ -3,7 +3,7 @@ const router = require('express').Router();
 const { Review, Product } = require('../db/models');
 module.exports = router;
 
-//This is tested and works
+//This is tested and works....
 router.get('/user/:userId', (req, res, next) => {
 
   const userId = req.params.userId;
