@@ -12,7 +12,11 @@
 const chalk = require('chalk')
 
 const db = require('../server/db')
-const { User, Product, Order, orderProduct } = require('../server/db/models')
+
+
+
+const { User, Product, Order, orderProduct, Reviews } = require('../server/db/models')
+
 
 
 
@@ -24,9 +28,21 @@ async function seed() {
   // executed until that promise resolves!
 
   const users = await Promise.all([
+
+    // User.create({password: '123', status:'guest'})
+    // User.create({email: 'murphy@email.com', password: '123', status:'guest'})
+    // User.create({email: 'null@gmail.com', password: 'null',status:'admin'}),
+    // User.create({firstName:"Amadou", lastName:"Jallow", address:"5 Hanover Square", email: "hi@gmail.com", password: "fsgsgerg",status:'admin'})
+
     User.create({ email: 'cody@email.com', password: '123' }),
     User.create({ email: 'murphy@email.com', password: '123' })
   ])
+
+  const reviews = await Promise.all([
+    Reviews.create({starRating: 5, content:''}),
+    Reviews.create({starRating: 4, content:'That was amazing!'})
+  ])
+
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
   console.log(`seeded ${users.length} users`)

@@ -6,52 +6,102 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate:{
+      isEmail:true
+    }
+  },
+  firstName:{
+    type:Sequelize.STRING,
+    allowNull:false
+  },
+  lastName:{
+    type:Sequelize.STRING,
+    allowNull:false
   },
   password: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull:false
   },
-  salt: {
-    type: Sequelize.STRING
+  status:{
+    type: Sequelize.ENUM,
+    values: ['member','admin'],
+    allowNull:false
   },
-  googleId: {
-    type: Sequelize.STRING
+  address:{
+    type: Sequelize.STRING,
+    allowNull:false
   }
+  //MAY BRING BACK WHEN USING OAUTH
+  // ,
+  // salt: {
+  //   type: Sequelize.STRING
+  // },
+  // googleId: {
+  //   type: Sequelize.STRING
+  // }
 })
 
 module.exports = User
 
+
+
+
 /**
  * instanceMethods
  */
-User.prototype.correctPassword = function (candidatePwd) {
-  return User.encryptPassword(candidatePwd, this.salt) === this.password
+User.prototype.getFullName= function (user) {
+  return `${user.firstName} ${user.lastName}`;
 }
+
+// MAY BRING BACK WHEN WE FIGURE OUT WHAT IT DOES
+// User.prototype.correctPassword = function (candidatePwd) {
+//   return User.encryptPassword(candidatePwd, this.salt) === this.password
+// }
+
+
+
+
+
+
 
 /**
  * classMethods
  */
-User.generateSalt = function () {
-  return crypto.randomBytes(16).toString('base64')
-}
 
-User.encryptPassword = function (plainText, salt) {
-  return crypto
-    .createHash('RSA-SHA256')
-    .update(plainText)
-    .update(salt)
-    .digest('hex')
-}
+// MAY BRING BACK WHEN WE FIGURE OUT WHAT IT DOES
+// User.generateSalt = function () {
+//   return crypto.randomBytes(16).toString('base64')
+// }
+
+// User.encryptPassword = function (plainText, salt) {
+//   return crypto
+//     .createHash('RSA-SHA256')
+//     .update(plainText)
+//     .update(salt)
+//     .digest('hex')
+// }
 
 /**
  * hooks
  */
-const setSaltAndPassword = user => {
-  if (user.changed('password')) {
-    user.salt = User.generateSalt()
-    user.password = User.encryptPassword(user.password, user.salt)
-  }
-}
 
-User.beforeCreate(setSaltAndPassword)
-User.beforeUpdate(setSaltAndPassword)
+User.hook('beforeCreate', (user) => {
+  if(user.status !== 'guest'){
+    if(!(user.email)|| !(user.password)) {
+      throw new Error(`${user.status}s must enter an email and password`);
+    }
+  }
+})
+
+
+// MAY BRING BACK WHEN WE FIGURE OUT WHAT IT DOES
+// const setSaltAndPassword = user => {
+//   if (user.changed('password')) {
+//     user.salt = User.generateSalt()
+//     user.password = User.encryptPassword(user.password, user.salt)
+//   }
+// }
+
+// User.beforeCreate(setSaltAndPassword)
+// User.beforeUpdate(setSaltAndPassword)
