@@ -33,12 +33,15 @@ async function seed() {
   console.log(`seeded successfully`)
 
   const products = await Promise.all([
-    Product.create({ name: 'tuner and hooch', category: 'comedy', description: 'animals tom hanks + dog', photos: 'none', stock: 18, price: 10 })
+    Product.create({ name: 'tuner and hooch', category: 'comedy', description: 'animals tom hanks + dog', photos: 'none', stock: 18, price: 10 }),
   ])
 
-  const order = await Promise.all([
-    Order.create({ status: 'pending' })
-  ])
+const order = await Order.create({ status: 'pending' })
+const assosOrder = await order.addProduct(1)
+
+await order.update({status: 'ordered'})
+
+//  testOrder.update({status:'ordered'})
 
 
 
@@ -48,38 +51,9 @@ async function seed() {
 // `Async` functions always return a promise, so we can use `catch` to handle any errors
 // that might occur inside of `seed`
 seed()
-.then(() => Product.findById(1))  // important to return ***
-.then(product => {
-  return product.addOrder(1)
-})
-// .then(console.log)
-.then(()=>{
- return Order.findById(1) })
- .then(order => {
-  // console.log(order.dataValues)
-  return order.update({status:'ordered'})
- })
 
 
-    // .then(arr =>{
-    //   Promise.all(arr)
-    //   .then(args => {
-    //     console.log(args[0])
-    //     console.log(args[1])
-    //   })
-    // })
 
-
-  // .catch(err => {
-  //   console.error(err.message)
-  //   console.error(err.stack)
-  //   process.exitCode = 1
-  // })
-  // .then(() => {
-  //   console.log('closing db connection')
-  //   db.close()
-  //   console.log('db connection closed')
-  // })
 
 /*
  * note: everything outside of the async function is totally synchronous

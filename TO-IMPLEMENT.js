@@ -22,3 +22,19 @@
     return product.addOrder(1)
   })
   .then(console.log)
+
+
+
+
+
+  // .then(() => Product.findById(1))  // important to return ***
+// .then(product => {
+//   return product.addOrder(1)
+// })
+// // .then(console.log)
+// .then(()=>{
+//  return Order.findById(1) })
+//  .then(order => {
+//   // console.log(order.dataValues)
+//   return order.update({status:'ordered'})
+//  })

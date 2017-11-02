@@ -19,8 +19,9 @@ Order.hook('afterUpdate', order => {
 
     OrderProduct.findOne({where: {orderId: 1}})
     .then(orderedProduct => {
-      console.log(chalk.magenta(orderedProduct.dataValues))
-          // orderedProduct.update({price: 10})
+      magenta('ordered product')
+      console.log(orderedProduct.dataValues)
+      return orderedProduct.update({price: 10})
     })
   }
 })
@@ -28,7 +29,7 @@ Order.hook('afterUpdate', order => {
 // magenta('hello world')
 
 function magenta(str){
-  return (chalk.magenta(str))
+  console.log (chalk.magenta(str))
 }
 
 
