@@ -34,8 +34,8 @@ async function seed() {
     // User.create({email: 'null@gmail.com', password: 'null',status:'admin'}),
     // User.create({firstName:"Amadou", lastName:"Jallow", address:"5 Hanover Square", email: "hi@gmail.com", password: "fsgsgerg",status:'admin'})
 
-    User.create({ email: 'cody@email.com', password: '123' }),
-    User.create({ email: 'murphy@email.com', password: '123' })
+    // User.create({ email: 'cody@email.com', password: '123' }),
+    // User.create({ email: 'murphy@email.com', password: '123' })
   ])
 
   const reviews = await Promise.all([
