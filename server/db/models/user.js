@@ -26,11 +26,11 @@ const User = db.define('user', {
   status:{
     type: Sequelize.ENUM,
     values: ['member','admin'],
-    allowNull:false
+    allowNull:true
   },
   address:{
     type: Sequelize.STRING,
-    allowNull:false
+    allowNull:true
   }
   //MAY BRING BACK WHEN USING OAUTH
   // ,

@@ -15,7 +15,7 @@ const db = require('../server/db')
 
 
 
-const { User, Product, Order, orderProduct, Reviews } = require('../server/db/models')
+const { User, Product, Order, orderProduct, Review } = require('../server/db/models')
 
 
 
@@ -34,13 +34,14 @@ async function seed() {
     // User.create({email: 'null@gmail.com', password: 'null',status:'admin'}),
     // User.create({firstName:"Amadou", lastName:"Jallow", address:"5 Hanover Square", email: "hi@gmail.com", password: "fsgsgerg",status:'admin'})
 
-    // User.create({ email: 'cody@email.com', password: '123' }),
-    // User.create({ email: 'murphy@email.com', password: '123' })
+    User.create({firstName: 'Amadou', lastName: 'Jallow', email: 'cody@email.com', password: '123' }),
+    User.create({firstName: 'Amadou', lastName: 'Jallow', email: 'murphy@email.com', password: '123' })
+
   ])
 
   const reviews = await Promise.all([
-    Reviews.create({starRating: 5, content:''}),
-    Reviews.create({starRating: 4, content:'That was amazing!'})
+    Review.create({starRating: 5, content:''}),
+    Review.create({starRating: 4, content:'That was amazing!'})
   ])
 
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
@@ -49,7 +50,10 @@ async function seed() {
   console.log(`seeded successfully`)
 
   const products = await Promise.all([
-    Product.create({ name: 'tuner and hooch', category: 'comedy', description: 'animals tom hanks + dog', photos: 'none', stock: 18, price: 10 }),
+    Product.create({ name: 'tuner and hoochfsg', category: 'comedy', description: 'andfgimals tom hanks + dog', photos: 'nofdsne', stock: 28, price: 70 }),
+    Product.create({ name: 'tuner and fsgdjhfj', category: 'centralfds', description: 'anadfimals tom hanks + dog', photos: 'none', stock: 13, price: 90 }),
+    Product.create({ name: 'tuner and fsgdjhfj', category: 'central', description: 'anidmals tom hanks + dog', photos: 'nondfse', stock: 68, price: 40 }),
+
   ])
 
 const order = await Order.create({ status: 'pending' })
