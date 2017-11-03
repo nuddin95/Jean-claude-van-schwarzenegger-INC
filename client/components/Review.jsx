@@ -3,15 +3,16 @@ import {render} from 'react-dom';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 
-export default class Review extends Component{
+const Review = () => {
 
-  render(){
-    return(
-      <div>
-         <h1>This is a Product Review Page</h1>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <h3>Welcome, {email}</h3>
+    </div>
+  )
 }
+
+export default Review;
+
 
 
