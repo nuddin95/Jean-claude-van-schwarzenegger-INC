@@ -1,0 +1,43 @@
+import axios from 'axios'
+
+//ACTION TYPES
+const GET_PRODUCTS = 'GET_PRODUCTS'
+
+// INITIAL STATE
+const allProducts = [] // array of obj values
+
+// ACTION CREATORS
+const loadProducts = (products) => ({type: GET_PRODUCTS, products: products })
+// const getProduct = product => ({type: GET_PRODUCT, product})
+
+
+//THUNK CREATORS
+
+export function fetchProducts() {
+
+  return function thunk(dispatch) {
+    return axios.get('/api/products')
+    .then(res => res.data)
+    .then(products => {
+      const action = loadProducts(products)
+      dispatch(action)
+    })
+  }
+
+}
+
+
+
+
+//REDUCER
+
+export default function(state = allProducts) {
+  switch(action.type) {
+
+    case GET_PRODUCTS:
+      return action.products
+
+    default:
+      return state
+  }
+}
