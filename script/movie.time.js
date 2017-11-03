@@ -41,25 +41,17 @@ async function seed() {
   }
   const orders = await Promise.all(ordersPromise)
 
+  // creates promises that associate order with product
+  // for now orerId will correspond to productID in tests may want to associate one order with multiple unique products or many of the same product
   const asosPromise = []
  for(let i= 0; i < orders.length ; i++){
-   magenta(i)
    asosPromise.push(orders[i].addProduct(i))
  }
 const oPassociation = await Promise.all(asosPromise)
 
 
-  // let test = orders[0]
-  // await test.addProduct(1)
-
-  // await order.update({status: 'ordered'})
-
-
 }
 
-// Execute the `seed` function
-// `Async` functions always return a promise, so we can use `catch` to handle any errors
-// that might occur inside of `seed`
 seed()
   .catch(err => {
     console.error(err.message)
