@@ -1,5 +1,5 @@
 const User = require('./user')
-const Reviews = require('./reviews')
+const Reviews = require('./review')
 const Product = require('./product')
 const Order = require('./order')
 const OrderProduct = require('./orderProduct')
@@ -19,7 +19,7 @@ Order.belongsToMany(Product, {through: OrderProduct })
  * for example, we can say: const {User} = require('../db/models')
  * instead of: const User = require('../db/models/user')
  */
-
+User.hasMany(Order, {as: 'OrderUserId'});
 User.hasMany(Reviews, {as: 'UserId'});
 
 module.exports = {
