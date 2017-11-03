@@ -36,6 +36,7 @@ async function seed() {
 
     User.create({firstName: 'Amadou', lastName: 'Jallow', email: 'cody@email.com', password: '123' }),
     User.create({firstName: 'Amadou', lastName: 'Jallow', email: 'murphy@email.com', password: '123' })
+
   ])
 
   const reviews = await Promise.all([
