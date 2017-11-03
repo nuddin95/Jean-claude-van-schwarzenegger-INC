@@ -8,7 +8,7 @@ const OrderProduct = require('./orderProduct')
 const Order = db.define('order', {
   status:{
     type: Sequelize.ENUM,
-    values: ['pending', 'ordered', 'shipped', 'delivered']
+    values: ['pending', 'ordered', 'shipped', 'delivered'] //maybe we could make a defualt pending value for
     }
 
 })
