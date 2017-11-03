@@ -10,7 +10,7 @@ const Reviews = db.define('reviews', {
 		type:Sequelize.TEXT,
 		allowNull:true,
 		validate:{
-			len:[0, 20]
+			len:[0, 20] // I think this should be longer -brian
 		}
 	}
 })
