@@ -8,6 +8,7 @@ router.get('/:userId', (req, res, next) => {
 		},
 		include:[{all:true}]
 	})
+	.then(order => res.json(order))
 })
 
 module.exports = router;
