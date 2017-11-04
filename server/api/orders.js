@@ -13,8 +13,9 @@ router.get('/:userId', (req, res, next) => {
 
 
 // what does this do? will never fire  -Brian
-router.get('/:orderId', (req, res, next)=>{
+router.get('/:userId/order/:orderId', (req, res, next)=>{
 	Order.findById(req.params.orderId, {include:[{all:true}]})
+	.then(order => res.json(order));
 })
 
 // when a user adds one item to the cart
@@ -23,28 +24,39 @@ router.get('/:orderId', (req, res, next)=>{
 // order.addProduct
 
 router.put('/:userId/add/:productId', (req, res, next) => {
-	let price;
 	let updatedOrder;
-	Product.findById(req.params.productId)
-	.then(product => price = product.price)
-	.then(()=>{
-		return Order.findOrCreate({
-			where:{
-				userId:req.params.userId,
-				status:"pending"
-				}
+	let savedOrder;
+	//FINDS OR CREATES ORDER INSTANCE FOR A USER
+	Order.findOrCreate({
+		where:{
+			userId:req.params.userId,
+			status:"pending"
 			}
-			)
-	})
+		}
+	)
+	//GETS ORDER ID OF FOUND OR CREATED
 	.then(order => {
-		console.log(order);
 		updatedOrder = (order[0]).id;
-		if(order[order.length-1]){
-			return (order[0]).addProduct(req.params.productId)
+		return order;
+	})
+	//FINDS ALL PRODUCTS ASSOCIATED TO ORDER
+	.then((order) => {
+		savedOrder = order;
+		return OrderProduct.findAll({
+			where:{
+				productId:req.params.productId,
+				orderId:updatedOrder
+			}
+		})
+	})
+	//IF PRODUCT IS NOT IN ORDER IT ADDS ASSOCIATION
+	.then(op => {
+		if(!(op.length)){
+			return (savedOrder[0]).addProduct(req.params.productId)
 		}
 	})
+	//SEARCHES FOR PRODUCT IN ORDER PRODUCTS ASSOCIATED WITH CORRECT ORDER
 	.then(()=>{
-		console.log(updatedOrder, Number(req.params.productId));
 		return OrderProduct.findOne({
 			where:{
 				productId:Number(req.params.productId),
@@ -52,22 +64,16 @@ router.put('/:userId/add/:productId', (req, res, next) => {
 			}
 		})
 	})
+	//UPDATES QUANTITY BY 1 OR SETS IT TO 1
 	.then((currOrder)=>{
-		console.log("CURRENT ORDER", currOrder)
 		currOrder.update({
-			price,
 			quantity:currOrder.quantity+1 || 1
 		})
 	})
+	//IF YOU REACHED THIS EVERYTHING WENT RIGHT
 	.then(() => res.send("ORDER UPDATED"))
 	.catch(next)
 })
-
-// router.post('/', (req, res, next) => {
-// 	Order.create(req.body)
-// 	.then(order => res.json(order))
-// 	.catch(next)
-// })
 
 router.delete('/:orderListId', (req, res, next)=>{
 	//FINDING ORDERS ITEMS
