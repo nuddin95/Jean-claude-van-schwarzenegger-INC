@@ -59,6 +59,9 @@ export default function (state = {}, action) {
     case MOD_STATUS:
       return action.order
 
+    case ADD_PRODUCT:
+      return action.order
+
     default:
       return state
   }

@@ -66,12 +66,12 @@ router.put('/:userId/add/:productId', (req, res, next) => {
 	})
 	//UPDATES QUANTITY BY 1 OR SETS IT TO 1
 	.then((currOrder)=>{
-		currOrder.update({
-			quantity:currOrder.quantity+1 || 1
+		return currOrder.update({
+		 	quantity:currOrder.quantity+1 || 1
 		})
 	})
 	//IF YOU REACHED THIS EVERYTHING WENT RIGHT
-	.then(() => res.send("ORDER UPDATED"))
+	.then((updatedOrder) => res.send(updatedOrder))
 	.catch(next)
 })
 

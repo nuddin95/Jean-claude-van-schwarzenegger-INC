@@ -14,7 +14,7 @@ class TestCart extends Component {
 
     componentDidMount() {
 
-      const addThunk = addProductToDb(1, 1) // hard coding an orderID
+      const addThunk = addProductToDb(1, 3) // hard coding an orderID
       store.dispatch(addThunk)
 
   }
