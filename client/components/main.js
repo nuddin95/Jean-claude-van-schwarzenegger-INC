@@ -1,9 +1,12 @@
+
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 
+import Test from './test'
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -16,6 +19,7 @@ const Main = (props) => {
   return (
     <div>
       <h1>Jean-Claude-Schwarzenegger-INC</h1>
+      >>>>>>> master
       <nav>
         {
           isLoggedIn
@@ -28,13 +32,14 @@ const Main = (props) => {
               {/* The navbar will show these links before you log in */}
               <Link to="/login">Login</Link>
               <Link to="/signup">Sign Up</Link>
-              <Link to="/all-products">All Products</Link>
+
             </div>
 
         }
       </nav>
       <hr />
       {children}
+      <Test /> // this is for testing front end without messing with this file
     </div>
   )
 }
@@ -46,6 +51,7 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id
   }
+
 }
 
 const mapDispatch = (dispatch) => {
@@ -68,6 +74,3 @@ Main.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }
-
-
-
