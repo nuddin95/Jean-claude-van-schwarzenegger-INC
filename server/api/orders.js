@@ -4,7 +4,7 @@ const { Order, Product, OrderProduct} = require('../db/models')
 router.get('/:userId', (req, res, next) => {
 	Order.findAll({
 		where:{
-			id:req.params.userId
+			userId:req.params.userId
 		},
 		include:[{model:Product}]
 	})
@@ -12,10 +12,15 @@ router.get('/:userId', (req, res, next) => {
 })
 
 
-
+// what does this do? will never fire  -Brian
 router.get('/:orderId', (req, res, next)=>{
 	Order.findById(req.params.orderId, {include:[{all:true}]})
 })
+
+// when a user adds one item to the cart
+// we create a new order
+
+// order.addProduct
 
 router.put('/:userId/add/:productId', (req, res, next) => {
 	let price;
@@ -35,7 +40,7 @@ router.put('/:userId/add/:productId', (req, res, next) => {
 		console.log(order);
 		updatedOrder = (order[0]).id;
 		if(order[order.length-1]){
-			return (order[0]).addProduct(req.params.productId)	
+			return (order[0]).addProduct(req.params.productId)
 		}
 	})
 	.then(()=>{
@@ -45,7 +50,7 @@ router.put('/:userId/add/:productId', (req, res, next) => {
 				productId:Number(req.params.productId),
 				orderId:updatedOrder
 			}
-		})	
+		})
 	})
 	.then((currOrder)=>{
 		console.log("CURRENT ORDER", currOrder)
@@ -66,7 +71,7 @@ router.put('/:userId/add/:productId', (req, res, next) => {
 
 router.delete('/:orderListId', (req, res, next)=>{
 	//FINDING ORDERS ITEMS
-	OrderProduct.findAll({ 
+	OrderProduct.findAll({
 		where:{
 			orderId: req.params.orderListId
 		}
