@@ -3,9 +3,6 @@ import axios from 'axios'
 //ACTION TYPES
 const GET_PRODUCTS = 'GET_PRODUCTS'
 
-// INITIAL STATE
-// array of obj values
-
 // ACTION CREATORS
 const loadProducts = (products) => ({ type: GET_PRODUCTS, products: products })
 // const getProduct = product => ({type: GET_PRODUCT, product})
@@ -25,7 +22,6 @@ export function fetchProducts() {
   }
 
 }
-
 
 
 //REDUCER

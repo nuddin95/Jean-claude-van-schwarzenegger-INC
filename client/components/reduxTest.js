@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import store from '../store'
 import { fetchProducts } from '../store/product'
+import { fetchOrder } from '../store/order'
+
 
 class ReduxTest extends Component {
   constructor() {
@@ -12,8 +14,8 @@ class ReduxTest extends Component {
   componentDidMount() {
     const productsThunk = fetchProducts()
     store.dispatch(productsThunk)
-    const orderThunk = fetchOrder()
-    srotre.dispatch(orderThunk)
+    const orderThunk = fetchOrder(1) // hard coding an orderID
+    store.dispatch(orderThunk)
   }
 
 
@@ -32,7 +34,8 @@ class ReduxTest extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    allProducts: state.allProducts
+    allProducts: state.allProducts,
+    order: state.order
   }
 }
 
