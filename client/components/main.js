@@ -1,5 +1,3 @@
-
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
@@ -39,7 +37,11 @@ const Main = (props) => {
       </nav>
       <hr />
       {children}
+<<<<<<< HEAD
+      <Test />
+=======
       <Test /> // this is for testing front end without messing with this file
+>>>>>>> master
     </div>
   )
 }
