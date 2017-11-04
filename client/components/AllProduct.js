@@ -1,37 +1,64 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
+import store from '../store'
+import { fetchProducts } from '../store/product'
+import { fetchOrder } from '../store/order'
+import { Link} from 'react-router-dom'
 
 
-const fakeProducts = [
-{ name: 'tuner and hooch', category: 'comedy', description: 'andfgimals tom hanks + dog', photos: 'https://i.ytimg.com/vi/kEJ0VY9jW9E/maxresdefault.jpg', stock: 28, price: 70 },
-{ name: 'tuner and sandwhic', category: 'centralfds', description: 'anadfimals tom hanks + dog', photos: 'https://frontrowmovies.net/Actionmovies.jpg', stock: 13, price: 90 },
-{ name: 'tuner and bread', category: 'central', description: 'anidmals tom hanks + dog', photos: 'http://img.wennermedia.com/social/rs-180704-AM.jpg', stock: 68, price: 40 },
-]
+class AllProduct extends Component {
+  constructor(props) {
+    super(props)
+  }
 
-export const AllProduct = () => {
+  componentDidMount() {
+    const productsThunk = fetchProducts()
+    store.dispatch(productsThunk)
+    const orderThunk = fetchOrder(1) // hard coding an orderID
+    store.dispatch(orderThunk)
+  }
 
-  return (
-    <div>
-      <h1>All Product List!!!!!!</h1>
-      <Link to="/review">Review</Link>
-      <hr />
-      {
-        fakeProducts.map(product => {
-          return (
-           <div key={product.name}>
-             <h1>{product.name}</h1>
-             <img src={product.photos} />
-             <Link to="/single-product">View </Link> |
-             <Link to="/cart"> Add to Cart </Link>  |
-           </div>
-        )
-        })
 
-      }
+  render() {
+    console.log(this.props, 'the props')
 
-    </div>
-  )
+    return (
+      <div>
+        <h1>All Product List!!!!!!</h1>
+        <Link to="/review">Review</Link>
+        <hr />
+        {
+          this.props.product.map(product => {
+            return (
+             <div key={product.name}>
+               <h1>{product.name}</h1>
+               <img src={product.photos} />
+               <Link to="/single-product">View </Link> |
+               <Link to="/cart"> Add to Cart </Link>  |
+              </div>
+          )
+          })
+
+        }
+
+      </div>
+    )
+  }
 }
 
-//export default AllProduct;
 
+// CONTAINER
+
+const mapStateToProps = (state) => {
+  return {
+    product: state.product,
+    order: state.order
+  }
+}
+
+// call connect function from react-redux, pass it mapState, and invoke with the presentational component (this component itself)
+export default connect(mapStateToProps)(AllProduct)
+// don't need map dispatch yet because no methods being called
+
+//PROP TYPES

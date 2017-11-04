@@ -13,11 +13,10 @@ import Test from './test'
  */
 const Main = (props) => {
   const {children, handleClick, isLoggedIn} = props
-
+// console.log(props, 'in main')
   return (
     <div>
       <h1>Jean-Claude-Schwarzenegger-INC</h1>
-      >>>>>>> master
       <nav>
         {
           isLoggedIn
@@ -37,11 +36,7 @@ const Main = (props) => {
       </nav>
       <hr />
       {children}
-<<<<<<< HEAD
-      <Test />
-=======
-      <Test /> // this is for testing front end without messing with this file
->>>>>>> master
+        <Test />
     </div>
   )
 }
@@ -51,7 +46,7 @@ const Main = (props) => {
  */
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
   }
 
 }
