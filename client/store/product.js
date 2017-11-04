@@ -4,10 +4,10 @@ import axios from 'axios'
 const GET_PRODUCTS = 'GET_PRODUCTS'
 
 // INITIAL STATE
-const allProducts = [] // array of obj values
+// array of obj values
 
 // ACTION CREATORS
-const loadProducts = (products) => ({type: GET_PRODUCTS, products: products })
+const loadProducts = (products) => ({ type: GET_PRODUCTS, products: products })
 // const getProduct = product => ({type: GET_PRODUCT, product})
 
 
@@ -17,22 +17,21 @@ export function fetchProducts() {
 
   return function thunk(dispatch) {
     return axios.get('/api/products')
-    .then(res => res.data)
-    .then(products => {
-      const action = loadProducts(products)
-      dispatch(action)
-    })
+      .then(res => res.data)
+      .then(products => {
+        const action = loadProducts(products)
+        dispatch(action)
+      })
   }
 
 }
 
 
 
-
 //REDUCER
 
-export default function(state = allProducts) {
-  switch(action.type) {
+export default function (state = [], action) {
+  switch (action.type) {
 
     case GET_PRODUCTS:
       return action.products
