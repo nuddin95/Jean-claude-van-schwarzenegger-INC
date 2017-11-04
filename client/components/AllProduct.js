@@ -21,9 +21,8 @@ export const AllProduct = () => {
            <div key={product.name}>
              <h1>{product.name}</h1>
              <img src={product.photos} />
-             <a href="#" > View </a> |
-             <a href="#" > Add to Cart </a> |
-             <a href="#" > Rate </a>
+             <Link to="/single-product">View </Link> |
+             <Link to="/cart"> Add to Cart </Link>  |
            </div>
         )
         })
