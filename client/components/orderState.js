@@ -6,7 +6,7 @@ import { fetchProducts } from '../store/product'
 import { fetchOrder } from '../store/order'
 
 
-class ReduxTest extends Component {
+class OrderState extends Component {
   constructor() {
     super()
   }
@@ -22,7 +22,7 @@ class ReduxTest extends Component {
   render() {
     return (
       <div>
-        <h3>a redux test</h3>
+        <h3>customer order</h3>
       </div>
     )
   }
@@ -40,7 +40,7 @@ const mapStateToProps = (state) => {
 }
 
 // call connect function from react-redux, pass it mapState, and invoke with the presentational component (this component itself)
-export default connect(mapStateToProps)(ReduxTest)
+export default connect(mapStateToProps)(OrderState)
 // don't need map dispatch yet because no methods being called
 
 //PROP TYPES
