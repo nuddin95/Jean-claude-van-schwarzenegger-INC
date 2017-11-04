@@ -12,6 +12,8 @@ class ReduxTest extends Component {
   componentDidMount() {
     const productsThunk = fetchProducts()
     store.dispatch(productsThunk)
+    const orderThunk = fetchOrder()
+    srotre.dispatch(orderThunk)
   }
 
 
