@@ -2,7 +2,7 @@
 const chalk = require('chalk')
 
 const db = require('../server/db')
-const { User, Product, Order, orderProduct, Reviews } = require('../server/db/models')
+const { User, Product, Order, orderProduct, Review } = require('../server/db/models')
 
 
 async function seed() {
@@ -18,14 +18,14 @@ async function seed() {
   ])
 
   const reviews = await Promise.all([
-    Reviews.create({ starRating: 5, content: 'test' }),
-    Reviews.create({ starRating: 4, content: 'That was amazing!' }),
-    Reviews.create({ starRating: 5, content: 'all time fav' }),
-    Reviews.create({ starRating: 3, content: 'ok i guess' }),
-    Reviews.create({ starRating: 1, content: 'the worst' }),
-    Reviews.create({ starRating: 5, content: 'you have to see it' }),
-    Reviews.create({ starRating: 5, content: 'my childs name' }),
-    Reviews.create({ starRating: 4, content: 'derp.' })
+    Review.create({ starRating: 5, content: 'test' }),
+    Review.create({ starRating: 4, content: 'That was amazing!' }),
+    Review.create({ starRating: 5, content: 'all time fav' }),
+    Review.create({ starRating: 3, content: 'ok i guess' }),
+    Review.create({ starRating: 1, content: 'the worst' }),
+    Review.create({ starRating: 5, content: 'you have to see it' }),
+    Review.create({ starRating: 5, content: 'my childs name' }),
+    Review.create({ starRating: 4, content: 'derp.' })
   ])
 
   const products = await Promise.all([
