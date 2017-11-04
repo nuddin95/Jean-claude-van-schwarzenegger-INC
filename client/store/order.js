@@ -4,12 +4,27 @@ const chalk = require('chalk')
 //ACTION TYPES
 const GET_ORDER = 'GET_ORDER'
 const MOD_STATUS = 'MOD_STATUS'
+const ADD_PRODUCT = 'ADD_PRODUCT'
 
 //ACTION CREATORS
 const getOrder = (order) => ({ type: GET_ORDER, order: order })
 const modStatus = (updatedOrder) => ({ type: MOD_STATUS, order: updatedOrder })
+const addProduct = (order) => ({type: ADD_PRODUCT, order: order})
 
 //THUNK CREATORS
+ export function addProductToDb (userId, productId) {
+  //console.log('order', `/api/orders/${userId}/add/${productId}`)
+
+    return function thunk(dispatch) {
+       return axios.put(`/api/orders/${userId}/add/${productId}`)
+         .then(res => res.data)
+         .then(order => {
+            dispatch(addProduct(order))
+         })
+    }
+ }
+
+
 
 export function fetchOrder(orderId) {
   return function thunk(dispatch) {
