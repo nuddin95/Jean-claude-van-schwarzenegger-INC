@@ -30,6 +30,7 @@ User.hasMany(Review, {as: 'UserId'});
  */
 
 
+
 module.exports = {
   User,
   Review,
