@@ -1,15 +1,17 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
+// import { withRouter }
 
 
 const fakeProducts = [
 { name: 'tuner and hooch', category: 'comedy', description: 'andfgimals tom hanks + dog', photos: 'https://i.ytimg.com/vi/kEJ0VY9jW9E/maxresdefault.jpg', stock: 28, price: 70 },
 { name: 'tuner and sandwhic', category: 'centralfds', description: 'anadfimals tom hanks + dog', photos: 'https://frontrowmovies.net/Actionmovies.jpg', stock: 13, price: 90 },
 { name: 'tuner and bread', category: 'central', description: 'anidmals tom hanks + dog', photos: 'http://img.wennermedia.com/social/rs-180704-AM.jpg', stock: 68, price: 40 },
-]
+];
 
-export const AllProduct = () => {
-
+function AllProduct(props){
+  console.log("THIS IS PROPS", props);
   return (
     <div>
       <h1>All Product List!!!!!!</h1>
@@ -33,5 +35,14 @@ export const AllProduct = () => {
   )
 }
 
+
+const mapStateToProps = (state) => {
+  return {
+    allProducts: state.allProducts,
+    order: state.order
+  }
+}
+
+export default connect(mapStateToProps)(AllProduct)
 //export default AllProduct;
 
