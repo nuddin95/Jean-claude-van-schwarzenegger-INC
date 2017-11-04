@@ -17,6 +17,7 @@ const Main = (props) => {
   return (
     <div>
       <h1>Jean-Claude-Schwarzenegger-INC</h1>
+      >>>>>>> master
       <nav>
         {
           isLoggedIn
@@ -36,7 +37,11 @@ const Main = (props) => {
       </nav>
       <hr />
       {children}
+<<<<<<< HEAD
+      <Test />
+=======
       <Test /> // this is for testing front end without messing with this file
+>>>>>>> master
     </div>
   )
 }
