@@ -50,7 +50,7 @@ export function changeOrderStatus(orderId, status){
 
 // REDUCER
 
-export default function (state = {}, action) {
+export default function (state = [], action) {
   switch (action.type) {
 
     case GET_ORDER:
@@ -60,7 +60,7 @@ export default function (state = {}, action) {
       return action.order
 
     case ADD_PRODUCT:
-      return action.order
+      return [...state, action.order]
 
     default:
       return state
