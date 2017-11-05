@@ -1,13 +1,11 @@
 import React from 'react';
-import AllProduct from './allProduct.js'
-
-
+import TestCart from './TestCart.js'
 
 export default function testWrapper(){
     return (
       <div>
         <h3>TESTS GO HERE</h3>
-       <AllProduct />
+       <TestCart />
       </div>
     )
 
