@@ -9,6 +9,7 @@ import { Link} from 'react-router-dom'
 class TestCart extends Component {
   constructor(props) {
     super(props)
+
   }
 
 
@@ -19,7 +20,11 @@ class TestCart extends Component {
 
   }
 
-  handleClick(){
+  handleClick(ev){
+    ev.preventDefault()
+    console.log('order submitted')
+    const addThunk = addProductToDb(1, 1) // hard coding an orderID
+    store.dispatch(addThunk)
 
   }
 
@@ -29,6 +34,7 @@ class TestCart extends Component {
     return (
       <div>
               <hi>Hello!!!!</hi>
+              <button onClick={this.handleClick}> add to cart </button>
       </div>
     )
   }
